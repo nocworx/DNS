@@ -34,10 +34,12 @@ class Validator
     /**
      * Validate the string as a valid hostname in accordance with RFC 952 {@link https://tools.ietf.org/html/rfc952}
      * and RFC 1123 {@link https://tools.ietf.org/html/rfc1123}.
+     * 
+     * Dont fail on just an underscore in hostname - flaszlo
      */
     public static function hostName(string $name): bool
     {
-        return (bool) filter_var($name, FILTER_VALIDATE_DOMAIN, [
+        return (bool) filter_var(str_replace('_', '-', $name), FILTER_VALIDATE_DOMAIN, [
             'flags' => FILTER_FLAG_HOSTNAME,
         ]);
     }
