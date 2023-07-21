@@ -82,15 +82,15 @@ class AlignedRdataFormatters
     }
 
     /**
-     * Split the TXT string into 40 character lines if the string is larger than 50 characters.
+     * Split the TXT string into 200 character lines if the string is larger than 255 characters.
      */
     public static function TXT(TXT $txt, int $padding): string
     {
-        if (strlen($txt->getText()) <= 50) {
+        if (strlen($txt->getText()) <= 255) {
             return $txt->toText();
         }
 
-        $lines = str_split($txt->getText(), 40);
+        $lines = str_split($txt->getText(), 200);
         $padString = str_repeat(Tokens::SPACE, $padding);
 
         $rdata = Tokens::OPEN_BRACKET.Tokens::SPACE;
